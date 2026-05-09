@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>iRacing OBS Overlay</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="overlay" id="overlay" aria-live="polite">
+      <section class="rating-panel">
+        <header class="panel-header">
+          <div class="identity">
+            <span class="status-dot" id="statusDot"></span>
+            <div class="logo-mark" aria-hidden="true">
+              <video src="/assets/logo-loop.mp4" autoplay muted loop playsinline preload="auto"></video>
+            </div>
+            <div class="identity-copy">
+              <p id="driverName">iRacing</p>
+              <h1 id="category">Loading</h1>
+            </div>
+          </div>
+          <div class="license-badge" id="className">--</div>
+        </header>
+
+        <div class="metrics">
+          <article class="metric">
+            <div class="metric-copy">
+              <span class="label">iRating</span>
+              <strong id="irating">----</strong>
+            </div>
+            <span class="delta" id="iratingDelta">+0</span>
+          </article>
+          <article class="metric">
+            <div class="metric-copy">
+              <span class="label">Safety Rating</span>
+              <strong id="safetyRating">--.--</strong>
+            </div>
+            <span class="delta" id="safetyDelta">+0.00</span>
+          </article>
+        </div>
+
+        <footer class="session-strip">
+          <span>Updated</span>
+          <strong id="lastCheck">Waiting</strong>
+        </footer>
+      </section>
+    </main>
+    <script src="/overlay.js" type="module"></script>
+  </body>
+</html>

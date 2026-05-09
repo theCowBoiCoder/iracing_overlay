@@ -1,0 +1,11 @@
+services:
+  iracing-obs-overlay:
+    build: .
+    container_name: iracing-obs-overlay
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./data:/app/data
