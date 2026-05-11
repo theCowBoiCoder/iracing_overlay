@@ -112,3 +112,150 @@ WantedBy=multi-user.target
 `POST /api/refresh` polls iRacing immediately.
 
 `POST /api/reset-baseline` makes the current ratings the new zero point.
+
+## Predictions
+
+OBS prediction overlay:
+
+```text
+http://your-server-ip:3333/prediction
+```
+
+Viewer voting page:
+
+```text
+http://your-server-ip:3333/vote
+```
+
+Admin page:
+
+```text
+http://your-server-ip:3333/admin
+```
+
+Open a prediction from the API:
+
+```bash
+curl -X POST "http://localhost:3333/api/prediction/open?token=your-token" \
+  -H "Content-Type: application/json" \
+  -d '{"question":"Will Hayden gain iRating?","options":"Yes,No","durationSeconds":180}'
+```
+
+Vote:
+
+```bash
+curl -X POST "http://localhost:3333/api/prediction/vote" \
+  -H "Content-Type: application/json" \
+  -d '{"platform":"twitch","voterId":"viewer123","displayName":"Viewer","choice":"yes"}'
+```
+
+Lock, resolve, and clear:
+
+```bash
+curl -X POST "http://localhost:3333/api/prediction/lock?token=your-token"
+curl -X POST "http://localhost:3333/api/prediction/resolve?token=your-token" -H "Content-Type: application/json" -d '{"choice":"yes"}'
+curl -X POST "http://localhost:3333/api/prediction/clear?token=your-token"
+```
+
+The OBS prediction overlay updates live using server-sent events, so votes appear without refreshing the browser source.
+
+## Streamer.bot Actions
+
+Create Streamer.bot actions that make HTTP requests to these URLs. Use your public/vhost URL if Streamer.bot is not running on the same machine.
+
+Open prediction:
+
+```text
+POST http://your-server-ip:3333/api/streamerbot/open?token=your-token
+```
+
+Body:
+
+```json
+{
+  "question": "Will Hayden gain iRating this race?",
+  "options": "Yes,No",
+  "duration": 180,
+  "source": "streamerbot"
+}
+```
+
+Twitch vote action for chat command `!vote`:
+
+```text
+POST http://your-server-ip:3333/api/streamerbot/vote
+```
+
+Body:
+
+```json
+{
+  "platform": "twitch",
+  "userId": "%userId%",
+  "displayName": "%user%",
+  "choice": "%rawInput%"
+}
+```
+
+YouTube vote action for chat command `!vote`:
+
+```json
+{
+  "platform": "youtube",
+  "userId": "%userId%",
+  "displayName": "%user%",
+  "choice": "%rawInput%"
+}
+```
+
+TikTok vote action:
+
+```json
+{
+  "platform": "tiktok",
+  "userId": "%userId%",
+  "displayName": "%user%",
+  "choice": "%rawInput%"
+}
+```
+
+Lock prediction:
+
+```text
+POST http://your-server-ip:3333/api/streamerbot/lock?token=your-token
+```
+
+Resolve prediction:
+
+```text
+POST http://your-server-ip:3333/api/streamerbot/resolve?token=your-token
+```
+
+Body:
+
+```json
+{ "choice": "yes" }
+```
+
+Clear prediction:
+
+```text
+POST http://your-server-ip:3333/api/streamerbot/clear?token=your-token
+```
+
+Suggested chat commands:
+
+```text
+!vote yes
+!vote no
+!prediction
+```
+
+Suggested mod-only actions:
+
+```text
+!openpred Will Hayden gain SR?|Yes,No|180
+!lockpred
+!resolvepred yes
+!clearpred
+```

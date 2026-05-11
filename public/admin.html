@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prediction Admin</title>
+    <link rel="stylesheet" href="/prediction.css">
+  </head>
+  <body class="page">
+    <main class="admin-shell">
+      <section class="admin-panel">
+        <p class="eyebrow">Prediction control</p>
+        <h1>Race predictions</h1>
+
+        <label>
+          Question
+          <input id="questionInput" value="Will Hayden gain iRating this race?">
+        </label>
+
+        <div class="field-row">
+          <label>
+            Options
+            <input id="optionsInput" value="Yes,No">
+          </label>
+          <label>
+            Lock after seconds
+            <input id="durationInput" type="number" min="0" step="15" value="180">
+          </label>
+        </div>
+
+        <label>
+          Admin token
+          <input id="tokenInput" type="password" placeholder="OBS_TOKEN if set">
+        </label>
+
+        <div class="button-row">
+          <button id="openButton">Open</button>
+          <button id="lockButton">Lock</button>
+          <button id="clearButton">Clear</button>
+        </div>
+
+        <div class="resolve-row" id="resolveRow"></div>
+        <pre id="adminState"></pre>
+      </section>
+    </main>
+    <script src="/admin.js" type="module"></script>
+  </body>
+</html>

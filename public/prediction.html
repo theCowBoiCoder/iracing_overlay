@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prediction Overlay</title>
+    <link rel="stylesheet" href="/prediction.css">
+  </head>
+  <body>
+    <main class="prediction-overlay" id="predictionOverlay">
+      <section class="prediction-card" data-status="idle">
+        <header>
+          <span class="status-pill" id="statusPill">Prediction</span>
+          <strong id="timer">--:--</strong>
+        </header>
+        <h1 id="question">No prediction open</h1>
+        <div class="options" id="options"></div>
+        <footer>
+          <span id="totalVotes">0 votes</span>
+          <span>Vote on stream</span>
+        </footer>
+      </section>
+    </main>
+    <script src="/prediction.js" type="module"></script>
+  </body>
+</html>
